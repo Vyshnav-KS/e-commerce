@@ -1,22 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import { COLORS } from '../styles/Constant';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { setAuthorizationToken } from '../App';
 
 
 const Login = () => {
+  const navigate = useNavigate()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  
+  const handleSubmit = async (e) =>{
+
+    e.preventDefault()
+    try{
+        const res = await axios.post('http://localhost:8000/api/auth/login/', {
+        username,
+        password,
+      });
+      const token = res.data.access;
+      localStorage.setItem('jwtToken', token);
+      setAuthorizationToken(token)
+      navigate('/')
+    }
+    catch(err){
+        console.error(err)
+    }
+  }
+
   return (
     <div className={css(styles.root)}>
         <div className={css(styles.container)}>
             <div className={css(styles.contents)}>
                 <div className={css(styles.logo)}>LibraryLane</div>
                 <div className={css(styles.inputs)}>
-                    <form className={css(styles.form)}>
-                        {/* <input className={css(styles.inpf)} type='email' placeholder='email'></input> */}
-                        <input className={css(styles.inpf)} type='text' size='15' placeholder='username'></input>
-                        <input className={css(styles.inpf)} type='password' size='15' placeholder='password'></input>
-                        {/* <input className={css(styles.inpf)} type='password' size='15' placeholder='confirm password'></input> */}
-                        <input className={css(styles.button)} type='button' value='Log In' />
+                    <form className={css(styles.form)} onSubmit={handleSubmit}>
+                        <input className={css(styles.inpf)} type='text' size='15' placeholder='username' value={username} onChange={(e) => setUsername(e.target.value)}></input>
+                        <input className={css(styles.inpf)} type='password' size='15' placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                        <input className={css(styles.button)} type='submit' value='Log In' />
 
                     </form>
                     <div className={css(styles.textpwd)}> Forgot password ?</div>

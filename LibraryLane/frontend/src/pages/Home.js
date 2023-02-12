@@ -6,6 +6,7 @@ import HomeImg from '../assets/images/Home.png'
 import CategoryCard from '../components/CategoryCard'
 import BookCard from '../components/BookCard'
 import Footer from '../components/Footer'
+import { Link } from 'react-router-dom'
 
 
 const Home = () => {
@@ -21,7 +22,7 @@ const Home = () => {
             <div className={css(styles.text)}>
             Your one-stop shop for endless books and endless adventures. <br/>Discover your next favorite read today!
             </div>
-            <div className={css(styles.button)}> Explore More</div>
+            <Link className={css(styles.button)} to='/books' > Explore More</Link>
 
           </div>
           <div className={css(styles.rightContents)}>
@@ -32,30 +33,17 @@ const Home = () => {
 
         <div className={css(styles.category)}>
           <div className={css(styles.catSecTitle)}>Shop Our Top Categories</div>
-          <div className={css(styles.catCards)}>
+          
             <CategoryCard />
-            <CategoryCard />
-            <CategoryCard />
-            <CategoryCard />
-            <CategoryCard />
-            <CategoryCard />
-          </div>
+            
         </div>
 
         <div className={css(styles.books)}>
           <div className={css(styles.bookSecTitle)}> Books for you</div>
-          <div className={css(styles.bookSec)}>
-            <BookCard />
-            <BookCard />
-            <BookCard />
-            <BookCard />
-            <BookCard />
-            <BookCard />
-            <BookCard />
-            <BookCard />
-          </div>
-
-          <div className={css(styles.button)}> Explore More</div>
+          
+            <BookCard limit={8}/>
+            
+          <Link className={css(styles.button)} to='/books' > Explore More</Link>
         </div>
 
         <div className={css(styles.footer)}>
@@ -104,7 +92,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    textDecoration: 'none'
   },
   rightContents:{
     marginTop: 23

@@ -1,32 +1,56 @@
 import { StyleSheet, css } from 'aphrodite'
-import React from 'react'
-import bookImg from '../assets/images/booktgg.png'
+import React, { useEffect, useState } from 'react'
 import { COLORS } from '../styles/Constant'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-const BookCard = () => {
+
+
+const BookCard = ({limit}) => {
+  
+  const [books, setBooks] = useState([])
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api/book/')
+    .then(res => {
+        setBooks(res.data.slice(0, limit))
+    })
+    .catch(error =>{
+        console.log(error)
+    })
+  })
+
   return (
-    <div className={css(styles.root)}>
-      <img src={bookImg} alt="book -image" className={css(styles.image)} />
+    <div className={css(styles.bookSec)}>
+        {
+            books.map(book => (
+                <Link to={`/books/${book.id}`} id={book.id} className={css(styles.root)}>
+      <img src={book.image_url} alt="book -image" className={css(styles.image)} />
 
       <div className={css(styles.contentBar)}>
         <div className={css(styles.titleSec)}>
             <div className={css(styles.title)}>
-            The Great Gatsby
+            {book.title}
             </div>
             <div className={css(styles.price)}>
-                $4.99
+                {book.price}
             </div>
         </div>
         <div className={css(styles.author)}>
-        F.Scott Fitzgerald
+        {book.author}
         </div>
       </div>
+    </Link>
+            ))
+        }
     </div>
+    
   )
 }
 
 const styles = StyleSheet.create({
     root:{
+        textDecoration: 'none',
         width: 355,
         height: 530,
         backgroundColor: '#F7F7F7',
@@ -34,10 +58,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: 20,
+        color: COLORS.black
 
     },
-    images:{
-        width: 229,
+    image:{
+        maxWidth: 229,
         height: 343,
     },
     contentBar:{
@@ -52,7 +77,6 @@ const styles = StyleSheet.create({
     titleSec:{
         display: 'flex',
         justifyContent: 'space-between',
-        
         margin: 15
     },
     title:{
@@ -69,7 +93,16 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 400,
         color: COLORS.grey
-    }
+    },
+    bookSec:{
+        marginTop: 55,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+        columnGap: 33,
+        rowGap: 56,
+        justifyContent: 'space-between' ,
+    
+      }
 })
 
 export default BookCard

@@ -44,10 +44,10 @@ class Order(models.Model):
     books = models.ManyToManyField(Book)
     address = models.TextField()
     pin_code = models.CharField(max_length=10)
-    delivery_charge = models.FloatField()
+    delivery_charge = models.FloatField(default=49)
     total_amount = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(choices=[('ordered', 'Ordered'), ('delivered', 'Delivered'), ('cancelled', 'Cancelled')], max_length=10)
+    status = models.CharField(choices=[('ordered', 'Ordered'), ('delivered', 'Delivered'), ('cancelled', 'Cancelled')], max_length=10, default='ordered')
     
     class Meta:
         ordering = ['-created_at']

@@ -1,26 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import { COLORS } from '../styles/Constant';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 const Signup = () => {
+const navigate = useNavigate()
+  
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const handleSubmit = (event) =>{
+    event.preventDefault()
+
+    if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+
+    const userData = {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        username: username,
+        password: password
+    };
+
+    axios.post('http://localhost:8000/api/auth/register/', userData)
+    .then(res => {
+        console.log(res)
+        alert("User Created Successfully")
+        // eslint-disable-next-line no-restricted-globals
+        navigate('/login')
+    })
+    .catch(error => {
+        console.log(error)
+        alert("Error creating user")
+    })
+  }
+
   return (
     <div className={css(styles.root)}>
         <div className={css(styles.container)}>
             <div className={css(styles.contents)}>
                 <div className={css(styles.logo)}>LibraryLane</div>
                 <div className={css(styles.inputs)}>
-                    <form className={css(styles.form)}>
+                    <form className={css(styles.form)} onSubmit={handleSubmit}>
                         <div className={css(styles.name)}>
-                        <input className={css(styles.inpfname)} type='text' size='15' placeholder='first name' ></input>
-                        <input className={css(styles.inpfname)} type='text' size='15' placeholder='last name' ></input>
+                        <input className={css(styles.inpfname)} type='text' size='15' placeholder='first name' value={firstName} onChange={e => setFirstName(e.target.value)} ></input>
+                        <input className={css(styles.inpfname)} type='text' size='15' placeholder='last name' value={lastName} onChange={e => setLastName(e.target.value)} ></input>
                         </div>
-                        <input className={css(styles.inpf)} type='email' placeholder='email'></input>
-                        <input className={css(styles.inpf)} type='text' size='15' placeholder='username'></input>
-                        <input className={css(styles.inpf)} type='password' size='15' placeholder='password'></input>
-                        <input className={css(styles.inpf)} type='password' size='15' placeholder='confirm password'></input>
-                        <input className={css(styles.button)} type='button' value='Sign Up' />
+                        <input className={css(styles.inpf)} type='email' placeholder='email' value={email} onChange={e => setEmail(e.target.value)} ></input>
+                        <input className={css(styles.inpf)} type='text' size='15' placeholder='username' value={username} onChange={e => setUsername(e.target.value)} ></input>
+                        <input className={css(styles.inpf)} type='password' size='15' placeholder='password' value={password} onChange={e => setPassword(e.target.value)}></input>
+                        <input className={css(styles.inpf)} type='password' size='15' placeholder='confirm password' value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}></input>
+                        <input className={css(styles.button)} type='submit' value='Sign Up' />
 
                     </form>
                     <div className={css(styles.text)}> Already have an account ?<Link  to = '/login' className={css(styles.Signup)}> Signin</Link> </div>

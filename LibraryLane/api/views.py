@@ -8,6 +8,7 @@ from rest_framework import status
 from .serializers import CategorySerializer, UserRegistrationSerializer, UsersListSerializer, BookSerializer, CartSerializer, OrderSerializer
 import uuid
 
+
 # Create your views here.
 
 class ListCategory(generics.ListCreateAPIView):

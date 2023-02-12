@@ -7,9 +7,9 @@ const Header = () => {
   return (
     <div className={css(styles.root)}>
       <div className={css(styles.contents)}>
-        <div className={css(styles.logo)}>
+        <Link to='/' className={css(styles.logo)}>
             LibraryLane
-        </div>
+        </Link>
         <div className={css(styles.navlinks)}>
             <div className={css(styles.navlink)}> About </div>
             <div className={css(styles.navlink)}> Categories </div>
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
         fontSize: 35,
         fontWeight: 700,
         color: COLORS.secondary,
-        marginTop: 41
+        marginTop: 41,
+        textDecoration: 'none'
     },
     navlinks:{
         display: 'flex',
