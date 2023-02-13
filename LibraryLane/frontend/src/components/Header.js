@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, css } from "aphrodite";
 import { COLORS } from "../styles/Constant";
 import { Link } from "react-router-dom";
 import userIcon from '../assets/images/user.png'
 import cartIcon from '../assets/images/shopping-cart.png'
+import { useBookstore } from "../store";
 
 const Header = () => {
+  const cartNo = useBookstore((state) => state.cart)  
   return (
     <div className={css(styles.root)}>
       <div className={css(styles.contents)}>
-        <Link to="/" className={css(styles.logo)}>
+        <Link to="/home" className={css(styles.logo)}>
           LibraryLane
         </Link>
         <div className={css(styles.navlinks)}>
@@ -35,7 +37,7 @@ const Header = () => {
             <img src={cartIcon} alt="cart"></img>
                     
             </Link>
-            ({1})
+            ({cartNo.length})
         </div>
       </div>
     </div>
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
   ulinel: {
     color: COLORS.black,
     textDecoration: "none",
+    marginRight: 20
   },
   ulines: {
     color: COLORS.white,

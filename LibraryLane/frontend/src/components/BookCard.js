@@ -35,7 +35,7 @@ const BookCard = ({ limit }) => {
           <div className={css(styles.contentBar)}>
             <div className={css(styles.titleSec)}>
               <div className={css(styles.title)}>{book.title}</div>
-              <div className={css(styles.price)}>{book.price}</div>
+              <div className={css(styles.price)}>₹ {book.price}</div>
             </div>
             <div className={css(styles.author)}>{book.author}</div>
           </div>
@@ -76,8 +76,9 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 600,
+    width: 250
   },
   price: {
     color: COLORS.secondary,

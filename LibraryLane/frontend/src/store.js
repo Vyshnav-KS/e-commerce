@@ -15,6 +15,11 @@ export const useBookstore = create(
         set((state) => ({
           cart: addBookToCart(state.cart, book),
         })),
+
+      removeFromCart: (book) =>
+        set((state) => ({
+          cart: removeFromCart(state.cart, book),
+        })),
     }),
 
     {
@@ -28,4 +33,8 @@ const addBookToCart = (books, newBook) => {
   const hasBook = books.some((book) => book.id === newBook.id);
   !hasBook && books.push(newBook);
   return [...books];
+};
+
+const removeFromCart = (books, bookToRemove) => {
+  return books.filter((book) => book.id !== bookToRemove.id);
 };

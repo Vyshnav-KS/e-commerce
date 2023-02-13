@@ -11,6 +11,7 @@ const Order = () => {
   const user = useBookstore((state) => state.user);
   const book = useBookstore((state) => state.book);
   const navigate = useNavigate();
+  const removeFromCart = useBookstore((state) => state.removeFromCart);
 
   const [username, setUsername] = useState(user.name);
   const [address, setAddress] = useState("");
@@ -33,6 +34,7 @@ const Order = () => {
     axios
       .post(`http://127.0.0.1:8000/api/order/`, orderData)
       .then((res) => {
+        removeFromCart(book);
         console.log(res.data);
         alert("Order Created");
         navigate("/profile");
@@ -94,12 +96,12 @@ const Order = () => {
         <div className={css(styles.priceDetails)}>
           <div className={css(styles.price)}>PRICE DETAILS</div>
           <div className={css(styles.divider)}></div>
-          <div className={css(styles.prices)}>MRP : {book.price}</div>
-          <div className={css(styles.prices)}>Total Discount Price : {}</div>
-          <div className={css(styles.prices)}>Delivery Charges : </div>
-          <div className={css(styles.prices)}>Other Charges : </div>
+          <div className={css(styles.prices)}>MRP : <b>{book.price}</b></div>
+          <div className={css(styles.prices)}>Total Discount Price : ₹ <b>0 </b></div>
+          <div className={css(styles.prices)}>Delivery Charges : ₹ <b>49</b></div>
+          <div className={css(styles.prices)}>Other Charges : ₹ <b>0 </b></div>
           <div className={css(styles.totalPrice)}>
-            TOTAL AMOUNT : <b>${parseFloat(book.price) + 49}</b>
+            TOTAL AMOUNT : <b className={css(styles.green)}>₹ {parseFloat(book.price) + 49}</b>
           </div>
         </div>
       </div>
@@ -158,7 +160,6 @@ const styles = StyleSheet.create({
     width: 546,
     margin: 9,
     height: 58,
-    // paddingLeft: 20,
     border: `1.5px solid ${COLORS.grey}`,
     "::placeholder": {
       fontSize: 16,
@@ -168,11 +169,19 @@ const styles = StyleSheet.create({
   },
   priceDetails: {
     marginLeft: 66,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: 250
   },
   divider: {
     width: 436,
     height: 2,
     backgroundColor: COLORS.grey,
+  },
+  green:{
+    color: COLORS.secondary,
+    fontSize: 25
   },
   button: {
     margin: 9,

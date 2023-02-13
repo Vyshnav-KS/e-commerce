@@ -9,20 +9,33 @@ import Footer from "../components/Footer";
 const Book = ({ book }) => {
   const navigate = useNavigate();
   const setCurrentBook = useBookstore((state) => state.setBook);
+  const removeFromCart = useBookstore((state) => state.removeFromCart);
   return (
     <div>
       <div className={css(styles.horizontal)}>
         <div className={css(styles.bottom)}>
           <div>{book.title}</div>
 
-          <button
-            onClick={() => {
-              setCurrentBook(book);
-              navigate("/order/" + book.id);
-            }}
-          >
-            BUY
-          </button>
+          <div>
+            <button
+              className={css(styles.buyB)}
+              onClick={() => {
+                setCurrentBook(book);
+                navigate("/order/" + book.id);
+              }}
+            >
+              Buy
+            </button>
+
+            <button
+              className={css(styles.remB)}
+              onClick={() => {
+                removeFromCart(book);
+              }}
+            >
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -87,6 +100,25 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-between",
     margin: 25,
+  },
+  buyB: {
+    width: 100,
+    height: 30,
+    backgroundColor: COLORS.secondary,
+    color: COLORS.white,
+    border: `1px solid ${COLORS.secondary}`,
+    cursor: 'pointer',
+    borderRadius: 3,
+  },
+  remB: {
+    width: 100,
+    height: 30,
+    backgroundColor: COLORS.white,
+    color: COLORS.black,
+    border: `1px solid ${COLORS.secondary}`,
+    borderRadius: 3,
+    marginLeft: 10,
+    cursor: 'pointer'
   },
 });
 

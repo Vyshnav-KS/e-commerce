@@ -1,8 +1,10 @@
 import { StyleSheet, css } from "aphrodite";
 import React from "react";
 import { COLORS } from "../styles/Constant";
+import { Link, useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate()
   return (
     <div className={css(styles.root)}>
       <div className={css(styles.container)}>
@@ -18,14 +20,16 @@ const Footer = () => {
             <div className={css(styles.title)}>Announcements</div>
           </div>
           <div className={css(styles.contents)}>
-            <div className={css(styles.title)}>Log Out</div>
-            <div className={css(styles.title)}>Log In</div>
-            <div className={css(styles.title)}>Sign Up</div>
+            <div onClick={()=>{
+              localStorage.removeItem('jwtToken')
+              navigate('/')
+            }} className={css(styles.title)}>Log Out</div>
+            <Link to='/login' className={css(styles.titlel)}>Log In</Link>
+            <Link to='/register' className={css(styles.titlel)}>Sign Up</Link>
           </div>
           <div className={css(styles.contents)}>
             <div className={css(styles.title)}>Facebook</div>
             <div className={css(styles.title)}>Instagram</div>
-            <div className={css(styles.title)}>You Tube</div>
             <div className={css(styles.title)}>Twitter</div>
           </div>
         </div>
@@ -73,6 +77,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: COLORS.grey,
   },
+  titlel:{
+    textDecoration: 'none',
+    color: COLORS.white,
+    cursor: 'pointer'
+  },
+  title:{
+    cursor: 'pointer'
+
+  }
 });
 
 export default Footer;

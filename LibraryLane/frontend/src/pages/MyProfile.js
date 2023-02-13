@@ -6,11 +6,13 @@ import { COLORS } from "../styles/Constant";
 import prof from "../assets/images/profile.png";
 import { useBookstore } from "../store";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const MyProfile = () => {
   const user = useBookstore((state) => state.user);
 
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -29,8 +31,12 @@ const MyProfile = () => {
       <div className={css(styles.pro)}>
         <div className={css(styles.profSec)}>
           <img src={prof} alt="image" />
-          <div className={css(styles.title)}>{user.name}</div>
-          <div className={css(styles.title)}>cart</div>
+          <div className={css(styles.titleC)}>{user.name}</div>
+          <div onClick={() => {
+            navigate("/cart")
+          }} className={css(styles.titleC)}>
+            cart
+          </div>
         </div>
         <div className={css(styles.orderSec)}>
           <div className={css(styles.myOrders)}>MY ORDERS</div>
@@ -47,7 +53,7 @@ const MyProfile = () => {
                       Book: <b>{order.books}</b>{" "}
                     </div>
                     <div className={css(styles.status)}>
-                      Price: <b>{order.total_amount} </b>
+                      Price: ₹ <b>{order.total_amount} </b>
                     </div>
                   </div>
                 </div>
@@ -74,6 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     height: 200,
     justifyContent: "space-between",
+    alignItems: 'center',
     fontSize: 18,
     fontWeight: 500,
     marginRight: 100,
@@ -107,6 +114,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     margin: 25,
   },
+  titleC:{
+    cursor: 'pointer',
+    marginTop: 10,
+  }
 });
 
 export default MyProfile;

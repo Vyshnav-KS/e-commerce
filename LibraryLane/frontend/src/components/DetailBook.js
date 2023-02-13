@@ -63,7 +63,7 @@ const DetailBook = () => {
             <div className={css(styles.title)}>{book.title}</div>
             <div className={css(styles.description)}>{book.description}</div>
             <div className={css(styles.priceSec)}>
-              <div className={css(styles.price)}>$ {book.price}</div>
+              <div className={css(styles.price)}>₹ {book.price}</div>
               <div className={css(styles.codStatus)}>
                 {" "}
                 Cash on Delivery Available
@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.secondary,
     color: COLORS.white,
     cursor: "pointer",
+    textDecoration: 'none'
   },
   details: {
     width: 957,

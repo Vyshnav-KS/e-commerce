@@ -26,7 +26,7 @@ const Login = () => {
         name: username,
       });
       setAuthorizationToken(token);
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       console.error(err);
     }
