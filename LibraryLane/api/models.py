@@ -35,13 +35,13 @@ class Cart(models.Model):
     
     class Meta:
         ordering = ['-created_at']
-        
+
     def __str__(self):
         return f'{self.user}'
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    books = models.ManyToManyField(Book)
+    user = models.CharField( max_length=255)
+    books = models.CharField(max_length=255)
     address = models.TextField()
     pin_code = models.CharField(max_length=10)
     delivery_charge = models.FloatField(default=49)
@@ -53,7 +53,7 @@ class Order(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"Order for user {self.user.username} with id {self.id}"
+        return f"Order with id {self.id}"
     
 
     

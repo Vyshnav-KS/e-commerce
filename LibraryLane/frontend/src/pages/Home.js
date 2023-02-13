@@ -93,7 +93,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     cursor: 'pointer',
-    textDecoration: 'none'
+    textDecoration: 'none',
+    
   },
   rightContents:{
     marginTop: 23

@@ -84,7 +84,7 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
 
 class OrderSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    # user = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Order

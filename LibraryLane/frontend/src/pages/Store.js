@@ -2,6 +2,7 @@ import { StyleSheet, css } from 'aphrodite'
 import React from 'react'
 import Header from '../components/Header'
 import BookCard from '../components/BookCard'
+import Footer from '../components/Footer'
 
 const Store = () => {
   return (
@@ -10,6 +11,7 @@ const Store = () => {
       <div className={css(styles.books)}>
       <BookCard />
       </div>
+      <Footer />
     </div>
   )
 }

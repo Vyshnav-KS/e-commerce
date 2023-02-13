@@ -10,6 +10,7 @@ import Store from "./pages/Store";
 import DetailBook from "./components/DetailBook";
 import Order from "./pages/Order";
 import MyCart from "./pages/MyCart";
+import MyProfile from "./pages/MyProfile";
 
 export const setAuthorizationToken = (token) => {
   if (token) {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/books/:id" element={<DetailBook />}></Route>
           <Route path="/order/:book_id" element={<Order />}></Route>
           <Route path="/cart/" element={<MyCart />}></Route>
+          <Route path="/profile" element={<MyProfile />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

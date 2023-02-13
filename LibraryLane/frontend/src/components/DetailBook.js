@@ -6,6 +6,7 @@ import { COLORS } from "../styles/Constant";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useBookstore } from "../store";
+import Footer from "./Footer";
 
 const DetailBook = () => {
   const { id } = useParams();
@@ -100,6 +101,7 @@ const DetailBook = () => {
           </Link>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
@@ -243,7 +245,6 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     cursor: "pointer",
     marginTop: 20,
-    marginBottom: 200,
     textDecoration: "none",
   },
 });

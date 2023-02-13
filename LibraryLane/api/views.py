@@ -82,7 +82,7 @@ class DetailCartView(generics.RetrieveUpdateDestroyAPIView):
     
 class ListOrderView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = Order
+    queryset = Order.objects.all()
     serializer_class = OrderSerializer
     
     def get_queryset(self):
