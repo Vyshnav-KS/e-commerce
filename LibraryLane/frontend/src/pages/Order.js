@@ -12,25 +12,22 @@ const Order = () => {
   const book = useBookstore((state) => state.book);
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState(user.name)
-  const [address, setAddress] = useState('')
-  const [pincode, setPincode] = useState('')
-  const [deliveryCharge, setDeliveryCharge] = useState(49)
-  const [totalAmount, setTotalAmount] = useState(0)
-  const [status, setStatus] = useState('ordered')
-
-
+  const [username, setUsername] = useState(user.name);
+  const [address, setAddress] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [deliveryCharge, setDeliveryCharge] = useState(49);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [status, setStatus] = useState("ordered");
 
   const handleSubmit = (event) => {
-
     const orderData = {
       user: username,
       books: book.title,
       address: address,
       pin_code: pincode,
       delivery_charge: 49,
-      total_amount: parseFloat(book.price) + 49
-    }
+      total_amount: parseFloat(book.price) + 49,
+    };
 
     event.preventDefault();
     axios
@@ -38,13 +35,11 @@ const Order = () => {
       .then((res) => {
         console.log(res.data);
         alert("Order Created");
-        navigate('/profile')
-        
+        navigate("/profile");
       })
       .catch((error) => {
         console.error(error);
-        alert("Error")
-
+        alert("Error");
       });
   };
 
@@ -62,7 +57,11 @@ const Order = () => {
                 <div className={css(styles.title)}>Order Date: 12/10/2023</div>
                 <div className={css(styles.titleCod)}>COD Available</div>
               </div>
-              <img src={book.image_url} alt="image" className={css(styles.image)}></img>
+              <img
+                src={book.image_url}
+                alt="image"
+                className={css(styles.image)}
+              ></img>
             </div>
             <div className={css(styles.bottom)}>
               <div className={css(styles.title)}>Address</div>
@@ -73,7 +72,7 @@ const Order = () => {
                   name="address"
                   placeholder="(House No, Building, Street, Area)"
                   value={address}
-                  onChange={e => setAddress(e.target.value)}
+                  onChange={(e) => setAddress(e.target.value)}
                 ></input>
                 <input
                   className={css(styles.inpf)}
@@ -81,7 +80,7 @@ const Order = () => {
                   name="pin_code"
                   placeholder="pincode"
                   value={pincode}
-                  onChange={e => setPincode(e.target.value)}
+                  onChange={(e) => setPincode(e.target.value)}
                 ></input>
                 <input
                   className={css(styles.button)}
