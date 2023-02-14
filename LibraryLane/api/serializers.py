@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Book, Cart, Order
+from .models import Category, Book, Order
 from django.contrib.auth.models import User
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -70,18 +70,18 @@ class BookSerializer(serializers.ModelSerializer):
             'date_created'
         )
 
-class CartSerializer(serializers.ModelSerializer):
+# class CartSerializer(serializers.ModelSerializer):
     
-    user = serializers.PrimaryKeyRelatedField(read_only=True)
-    books = BookSerializer(read_only = True, many = True)
+#     user = serializers.PrimaryKeyRelatedField(read_only=True)
+#     books = BookSerializer(read_only = True, many = True)
     
-    class Meta:
-        fields = (
-            'user',
-            'created_at',
-            'books',
-        )
-        model = Cart
+#     class Meta:
+#         fields = (
+#             'user',
+#             'created_at',
+#             'books',
+#         )
+#         model = Cart
 
 class OrderSerializer(serializers.ModelSerializer):
     # user = serializers.PrimaryKeyRelatedField(read_only=True)

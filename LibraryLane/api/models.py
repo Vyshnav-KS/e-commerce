@@ -28,16 +28,16 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='carts')
-    created_at = models.DateTimeField(auto_now_add=True)
-    books = models.ManyToManyField(Book)
+# class Cart(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='carts')
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     books = models.ManyToManyField(Book)
     
-    class Meta:
-        ordering = ['-created_at']
+#     class Meta:
+#         ordering = ['-created_at']
 
-    def __str__(self):
-        return f'{self.user}'
+#     def __str__(self):
+#         return f'{self.user}'
 
 class Order(models.Model):
     user = models.CharField( max_length=255)

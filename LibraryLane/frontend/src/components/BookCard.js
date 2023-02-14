@@ -7,6 +7,10 @@ import { Link } from "react-router-dom";
 const BookCard = ({ limit }) => {
   const [books, setBooks] = useState([]);
 
+  const handleScrollTop = () =>{
+    window.scrollTo({top: 0, behavior: 'smooth'})
+  }
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/book/")
@@ -19,7 +23,7 @@ const BookCard = ({ limit }) => {
   }, [limit]);
 
   return (
-    <div className={css(styles.bookSec)}>
+    <div className={css(styles.bookSec)} onClick={handleScrollTop}>
       {books.map((book) => (
         <Link
           to={`/books/${book.id}`}

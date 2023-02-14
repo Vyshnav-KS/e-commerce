@@ -23,8 +23,8 @@ export const useBookstore = create(
     }),
 
     {
-      name: "book-storage", // unique name
-      storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
+      name: "book-storage", 
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );

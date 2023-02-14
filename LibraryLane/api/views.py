@@ -3,9 +3,9 @@ from rest_framework import generics
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework import permissions
-from .models import Category, Book, Cart, Order
+from .models import Category, Book, Order
 from rest_framework import status
-from .serializers import CategorySerializer, UserRegistrationSerializer, UsersListSerializer, BookSerializer, CartSerializer, OrderSerializer
+from .serializers import CategorySerializer, UserRegistrationSerializer, UsersListSerializer, BookSerializer, OrderSerializer
 import uuid
 
 
@@ -64,21 +64,21 @@ class DetailBookView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     
-class ListCartView(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
-    queryset = Cart.objects.all()
-    serializer_class = CartSerializer
+# class ListCartView(generics.ListCreateAPIView):
+#     permission_classes = (permissions.IsAuthenticated,)
+#     queryset = Cart.objects.all()
+#     serializer_class = CartSerializer
     
-    def get_queryset(self):
-        return Cart.objects.filter(user=self.request.user)
+#     def get_queryset(self):
+#         return Cart.objects.filter(user=self.request.user)
 
-class DetailCartView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
-    queryset = Cart.objects.all()
-    serializer_class = CartSerializer
+# class DetailCartView(generics.RetrieveUpdateDestroyAPIView):
+#     permission_classes = (permissions.IsAuthenticated,)
+#     queryset = Cart.objects.all()
+#     serializer_class = CartSerializer
     
-    def get_queryset(self):
-        return Cart.objects.filter(user=self.request.user)
+#     def get_queryset(self):
+#         return Cart.objects.filter(user=self.request.user)
     
 class ListOrderView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)

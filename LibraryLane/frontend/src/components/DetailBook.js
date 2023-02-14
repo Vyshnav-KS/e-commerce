@@ -15,6 +15,7 @@ const DetailBook = () => {
   const addToCart = useBookstore((state) => state.addToCart);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     axios
       .get(`http://127.0.0.1:8000/api/book/${id}/`)
@@ -95,7 +96,7 @@ const DetailBook = () => {
         </div>
         <div className={css(styles.similaritemSec)}>
           <div className={css(styles.simTitle)}> Similar Books</div>
-          <BookCard limit={4} />
+          <BookCard limit={4}  />
           <Link to="/books" className={css(styles.explore)}>
             Explore More
           </Link>
