@@ -9,7 +9,7 @@ The project aims to provide a platform for users to buy and sell books online. U
 
 ## Tech Stack
 
-- Frontend: React
+- Frontend: React & zustand
 - Backend: Django REST API
 - Database: sqlite
 
@@ -48,6 +48,3 @@ Contributions to the project are welcome. To contribute, follow these steps:
 4. Push to the branch: `git push origin new-feature`
 5. Create a pull request
 
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more information.
