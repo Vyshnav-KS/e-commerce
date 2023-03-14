@@ -1,7 +1,7 @@
 # LibraryLane
-### Ecommerce Bookstore Project
+### Ecommerce Book Store Project
 
-This is an ecommerce bookstore project built with React on the frontend and Django REST API on the backend.
+This is an ecommerce book store project built with React on the frontend and Django REST API on the backend.
 
 ## Project Overview
 
